@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&display=swap');
+
 body {
-            font-family: Arial, sans-serif;
+            font-family: 'Fira Sans', Arial, sans-serif;
+            font-size: 16px;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
@@ -141,7 +144,7 @@ body {
             box-shadow: 0 4px 8px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
             z-index: 1000;
-            font-size: 14px;
+            font-size: 15px;
         }
         
         .theme-toggle:hover {
@@ -177,4 +180,132 @@ body {
         
         body.dark-mode .theme-toggle:hover {
             background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        
+        /* Estilos responsivos para dispositivos móveis */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                font-size: 15px;
+            }
+            
+            .menu-container {
+                padding: 20px;
+                margin-bottom: 15px;
+            }
+            
+            .chapter-content {
+                padding: 20px;
+                margin: 15px 0;
+                font-size: 15px;
+                line-height: 1.7;
+            }
+            
+            .chapter-content h1 {
+                font-size: 1.5em;
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+            }
+            
+            .navigation {
+                margin-top: 30px;
+                padding: 15px 0;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .navigation a {
+                padding: 10px 15px;
+                margin: 5px;
+                font-size: 13px;
+                min-width: 120px;
+                text-align: center;
+            }
+            
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .chapter-list a {
+                padding: 12px 15px;
+                font-size: 15px;
+            }
+            
+            .content-preview {
+                padding: 15px;
+                font-size: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            
+            .menu-container {
+                padding: 15px;
+            }
+            
+            .chapter-content {
+                padding: 15px;
+                font-size: 15px;
+                line-height: 1.6;
+            }
+            
+            .chapter-content h1 {
+                font-size: 1.3em;
+                word-wrap: break-word;
+            }
+            
+            .navigation {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .navigation a {
+                width: 100%;
+                max-width: 200px;
+                margin: 0;
+                padding: 12px 20px;
+            }
+            
+            .theme-toggle {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .chapter-list a {
+                padding: 10px 12px;
+                font-size: 14px;
+                line-height: 1.4;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            h2 {
+                font-size: 1.2em;
+            }
+        }
+        
+        /* Melhorias gerais para touch devices */
+        @media (hover: none) and (pointer: coarse) {
+            .navigation a,
+            .chapter-list a,
+            .theme-toggle {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .theme-toggle {
+                min-height: 40px;
+            }
         }
