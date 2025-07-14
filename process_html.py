@@ -20,16 +20,16 @@ if not os.path.exists(filename):
 with open(filename, "r", encoding="utf-8") as file:
     content = file.read()
 
-# Separar o cabeçalho HTML do conteúdo do body
-header_match = re.search(r"(.*?<body>\s*)", content, re.DOTALL)
-footer_match = re.search(r"(\s*</body>.*)", content, re.DOTALL)
+# Procurar pela div com class="chapter-content"
+chapter_content_match = re.search(r'(<div[^>]*class=["\']chapter-content["\'][^>]*>)(.*?)(</div>)', content, re.DOTALL | re.IGNORECASE)
 
-if header_match and footer_match:
-    header = header_match.group(1)
-    footer = footer_match.group(1)
-
-    # Extrair apenas o conteúdo entre <body> e </body>
-    body_content = content[len(header) : -len(footer)]
+if chapter_content_match:
+    # Extrair as partes
+    before_chapter_content = content[:chapter_content_match.start()]
+    opening_div = chapter_content_match.group(1)
+    chapter_content = chapter_content_match.group(2)
+    closing_div = chapter_content_match.group(3)
+    after_chapter_content = content[chapter_content_match.end():]
 
     # Função para normalizar tags <br> para exatamente 2
     def normalize_br_tags(text):
@@ -66,11 +66,11 @@ if header_match and footer_match:
         
         return '\n'.join(processed_lines)
     
-    # Aplicar a normalização
-    cleaned_content = normalize_br_tags(body_content)
+    # Aplicar a normalização apenas no conteúdo da div chapter-content
+    cleaned_chapter_content = normalize_br_tags(chapter_content)
     
     # Reconstruir o conteúdo
-    new_content = header + cleaned_content + footer
+    new_content = before_chapter_content + opening_div + cleaned_chapter_content + closing_div + after_chapter_content
 
     # Salvar o arquivo modificado
     with open(filename, "w", encoding="utf-8") as file:
@@ -78,9 +78,11 @@ if header_match and footer_match:
 
     print(f"Arquivo '{filename}' processado com sucesso!")
     print("Processamento concluído:")
+    print("- Tags <br> processadas apenas dentro da div com class='chapter-content'")
     print("- Linhas sem <br>: adicionadas 2 tags <br>")
     print("- Linhas com 1 <br>: adicionada 1 tag <br>")
     print("- Linhas com 2 <br>: mantidas como estão")
     print("- Linhas com mais de 2 <br>: reduzidas para 2 tags <br>")
 else:
-    print("Erro: Não foi possível encontrar as tags <body> no arquivo.")
+    print("Erro: Não foi possível encontrar a div com class='chapter-content' no arquivo.")
+    print("Verifique se o arquivo contém uma div com essa classe.")
