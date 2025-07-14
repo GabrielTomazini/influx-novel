@@ -8,15 +8,19 @@
 </head>
 <body>
 
+<button class="theme-toggle" onclick="toggleTheme()">🌙 Modo Escuro</button>
 
 <div class="navigation">
-    <a href="1149.html" class="prev-chapter">← Capítulo Anterior</a>
+    <a href="1149.html" class="prev-chapter"> Capítulo Anterior</a>
     <a href="../index.html" class="menu-link">📚 Voltar ao Menu</a>
-    <a href="1151.html" class="next-chapter">Próximo Capítulo →</a>
+    <a href="1151.html" class="next-chapter">Próximo Capítulo </a>
 </div>
 
-<h1>Capítulo 1150: Batalha no Mar de Fluxo Turbulento (1/2)</h1><br><br>Liu Qing Yu repetiu suas palavras de antes.
-A expressão de Ying Wu Xie tornou-se sombria muito rapidamente.<br><br>
+<div class="chapter-content">
+<h1>Capítulo 1150: Batalha no Mar de Fluxo Turbulento (1/2)</h1>
+
+Liu Qing Yu repetiu suas palavras de antes.
+   A expressão de Ying Wu Xie tornou-se sombria muito rapidamente.<br><br>
 Fang Yuan havia usado o rosto familiar ao viajar da Fronteira Sul para as Planícies do Norte, ele havia ocultado sua aparência. Mas o rosto familiar não conseguia esconder os efeitos de um Gu Imortal ou movimentos assassinos imortais.<br><br>
 Quando esteve no Mar do Leste, Fang Yuan lutou com Liu Qing Yu, Tang Song e Zhou Li, e inevitavelmente revelou alguns métodos.<br><br>
 Embora Ying Wu Xie não soubesse a aparência de Fang Yuan naquela época, pela descrição de Liu Qing Yu, ele sentiu uma sensação de familiaridade.<br><br>
@@ -97,11 +101,41 @@ Movimento assassino investigativo imortal — Sensação da Sorte do Qi!<br><br>
 Este movimento foi obtido da herança de Feng Jun, usava o Gu da Sorte do Qi Imortal como núcleo, e podia sentir pessoas que estavam intimamente conectadas pela sorte ao usuário do Gu Imortal. Quanto mais próxima a distância, mais claros os efeitos.<br><br>
 “Oh? Eles estão por perto! Estão na área marítima de fluxo turbulento?”<br><br>
 
-<div class="navigation">
-    <a href="1149.html" class="prev-chapter">← Capítulo Anterior</a>
-    <a href="../index.html" class="menu-link">📚 Voltar ao Menu</a>
-    <a href="1151.html" class="next-chapter">Próximo Capítulo →</a>
 </div>
+
+<div class="navigation">
+    <a href="1149.html" class="prev-chapter"> Capítulo Anterior</a>
+    <a href="../index.html" class="menu-link">📚 Voltar ao Menu</a>
+    <a href="1151.html" class="next-chapter">Próximo Capítulo </a>
+</div>
+
+<script>
+function toggleTheme() {
+    const body = document.body;
+    const button = document.querySelector('.theme-toggle');
+    
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        button.textContent = '☀️ Modo Claro';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        button.textContent = '🌙 Modo Escuro';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// Carregar tema salvo
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme');
+    const button = document.querySelector('.theme-toggle');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        button.textContent = '☀️ Modo Claro';
+    }
+});
+</script>
 
 </body>
 </html>

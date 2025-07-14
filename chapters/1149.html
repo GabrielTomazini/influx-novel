@@ -9,13 +9,17 @@
 </head>
 <body>
 
+<button class="theme-toggle" onclick="toggleTheme()">🌙 Modo Escuro</button>
+
 <div class="navigation">
     <a href="../index.html" class="menu-link">📚 Voltar ao Menu</a>
-    <a href="1150.html" class="next-chapter">Próximo Capítulo →</a>
+    <a href="1150.html" class="next-chapter">Próximo Capítulo</a>
 </div>
 
 <h1>Capítulo 1149: Desejando a Herança do Caminho da Informação</h1>
 
+<div class="chapter-content">
+    
 Os ventos fortes sopravam, carregando o sabor salgado da água do mar.<br>
 <br>
 Fang Yuan sentou-se no topo de uma nuvem, viajando rapidamente enquanto dividia sua atenção para o Gu mortal do caminho da informação em sua mão.<br>
@@ -195,10 +199,41 @@ Ele queria encontrar um lugar para descansar, mas acabou indo em direção à ba
 A expressão de Ying Wu Xie mudou de repente: “Espere, o Gu Imortal de quem você suspeitava antes, qual era a aparência dele?”<br>
 <br>
 
+
+</div>
+
 <div class="navigation">
     <a href="../index.html" class="menu-link">📚 Voltar ao Menu</a>
-    <a href="1150.html" class="next-chapter">Próximo Capítulo →</a>
+    <a href="1150.html" class="next-chapter">Próximo Capítulo </a>
 </div>
+
+<script>
+function toggleTheme() {
+    const body = document.body;
+    const button = document.querySelector('.theme-toggle');
+    
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        button.textContent = '☀️ Modo Claro';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        button.textContent = '🌙 Modo Escuro';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// Carregar tema salvo
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme');
+    const button = document.querySelector('.theme-toggle');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        button.textContent = '☀️ Modo Claro';
+    }
+});
+</script>
 
 </body>
 </html>

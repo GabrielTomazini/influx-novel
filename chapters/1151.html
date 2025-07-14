@@ -9,7 +9,17 @@
 </head>
 <body>
 
-<h1>Capítulo 1151: Batalha no Mar de Fluxo Turbulento (2/2)</h1><br><br>Cinco Imortais Gu moviam-se pela superfície do mar.
+<button class="theme-toggle" onclick="toggleTheme()">🌙 Modo Escuro</button>
+
+<div class="navigation">
+     <a href="1150.html" class="prev-chapter">Capítulo Anterior</a>
+    <a href="../index.html" class="menu-link">📚 Voltar ao Menu</a>
+</div>
+
+<div class="chapter-content">
+<h1>Capítulo 1151: Batalha no Mar de Fluxo Turbulento (2/2)</h1>
+
+Cinco Imortais Gu moviam-se pela superfície do mar.
 "Hehehe, com o arranjo apropriado, contanto que Fang Yuan caia na armadilha, ele sofrerá. Mesmo que não possamos prendê-lo, podemos atrasar muito seu crescimento." Ying Wu Xie sentiu-se um pouco presunçoso.<br><br>
 O desenvolvimento de Fang Yuan era rápido demais, era aterrorizante!<br><br>
 A vontade do céu estava tentando todos os meios possíveis para matá-lo, chegando a usar os homens de neve e os homens de pedra.<br><br>
@@ -141,11 +151,40 @@ Esta era uma rara chance de entrar na terra abençoada!<br><br>
 Se ele a perdesse, para entrar mais tarde, haveria obstáculos muito maiores.<br><br>
 No passado, quando Fang Yuan colocou a terra abençoada da Forma Estelar e a terra abençoada de Ge Pi, ele também usou essas chances para entrar na terra abençoada.<br><br>
 
-<div class="navigation">
-    <a href="../index.html" class="menu-link">📚 Voltar ao Menu</a>
-    <a href="1150.html" class="prev-chapter">← Capítulo Anterior</a>
 </div>
 
+<div class="navigation">
+     <a href="1150.html" class="prev-chapter">Capítulo Anterior</a>
+    <a href="../index.html" class="menu-link">📚 Voltar ao Menu</a>
+</div>
+
+<script>
+function toggleTheme() {
+    const body = document.body;
+    const button = document.querySelector('.theme-toggle');
+    
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        button.textContent = '☀️ Modo Claro';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        button.textContent = '🌙 Modo Escuro';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// Carregar tema salvo
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme');
+    const button = document.querySelector('.theme-toggle');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        button.textContent = '☀️ Modo Claro';
+    }
+});
+</script>
 
 </body>
 </html>
