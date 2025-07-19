@@ -40,6 +40,7 @@ body {
             border-radius: 5px;
             transition: all 0.3s;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-align: left;
         }
         .chapter-list a:hover {
             background: linear-gradient(135deg, #1d4ed8, #06b6d4);
@@ -251,6 +252,7 @@ body {
             .chapter-list a {
                 padding: 12px 15px;
                 font-size: 15px;
+                text-align: left;
             }
             
             .content-preview {
@@ -302,6 +304,7 @@ body {
                 padding: 10px 12px;
                 font-size: 14px;
                 line-height: 1.4;
+                text-align: left;
             }
             
             h1 {
