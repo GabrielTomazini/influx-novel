@@ -319,8 +319,14 @@ body {
         /* Melhorias gerais para touch devices */
         @media (hover: none) and (pointer: coarse) {
             .navigation a,
-            .chapter-list a,
             .theme-toggle {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .chapter-list a {
                 min-height: 44px;
                 display: flex;
                 align-items: center;
@@ -329,7 +335,6 @@ body {
             
             .theme-toggle {
                 min-height: 40px;
-                justify-content: center;
             }
         }
         
