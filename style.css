@@ -425,3 +425,21 @@ body {
         font-size: 0.9rem;
     }
 }
+
+/* Imagens dentro do capítulo */
+.chapter-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+@media (max-width: 480px) {
+    .chapter-content img {
+        max-width: 100%;
+        height: auto;
+        margin: 12px auto;
+        border-radius: 8px;
+    }
+}
