@@ -2,9 +2,7 @@
 
 и
 
-ataque surpresa
-
-Céu Ladrão
+painstakingmente
 
 <A Lenda de Ren Zu>
 
