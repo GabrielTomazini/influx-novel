@@ -17,6 +17,7 @@ REPLACEMENTS = {
     "painstakingmente": "diligentemente",
     "painstakingly": "diligentemente",
     "<A Lenda de Ren Zu>": "&lt;A Lenda de Ren Zu&gt;",
+    "<a de=" " lenda=" " ren=" " zu=" ">": "&lt;A Lenda de Ren Zu&gt;",
 }
 
 
