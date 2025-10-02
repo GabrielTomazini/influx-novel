@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="../favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+    <title>Capítulo 1712 - Batalha de Bestas Desoladas Lendárias</title>
+    <link href="../style.css" rel="stylesheet"/>
+</head>
+<body>
+<button class="theme-toggle" onclick="toggleTheme()">🌙 Modo Escuro</button>
+
+<div class="navigation">
+    <a class="prev-chapter" href="1711.html"> Capítulo Anterior</a>
+    <a class="menu-link" href="../index.html">📚 Voltar ao Menu</a>
+    <a class="next-chapter" href="1713.html">Próximo Capítulo </a>
+</div>
+
+<div class="chapter-content">
+
+<h1>Capítulo 1712 - Batalha de Bestas Desoladas Lendárias</h1>
+
+<p class="note">Nota:Esse capítulo ainda não foi revisado, pode conter alguns erros.</p>
+
+</div>
+
+<div class="navigation">
+    <a class="prev-chapter" href="1711.html"> Capítulo Anterior</a>
+    <a class="menu-link" href="../index.html">📚 Voltar ao Menu</a>
+    <a class="next-chapter" href="1713.html">Próximo Capítulo </a>
+</div>
+
+<script>
+function toggleTheme() {
+    const body = document.body;
+    const button = document.querySelector('.theme-toggle');
+    
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        button.textContent = '☀️ Modo Claro';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        button.textContent = '🌙 Modo Escuro';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// Carregar tema salvo
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme');
+    const button = document.querySelector('.theme-toggle');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        button.textContent = '☀️ Modo Claro';
+    }
+});
+</script>
+</body>
+</html>
