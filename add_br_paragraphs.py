@@ -44,14 +44,14 @@ def add_br_to_paragraphs(html_content: str) -> tuple[str, int]:
 
     # Processar linha por linha
     lines = inner_content.split("\n")
-    
+
     # Encontrar o índice do último parágrafo com conteúdo
     last_content_index = -1
     for i in range(len(lines) - 1, -1, -1):
         if lines[i].strip():
             last_content_index = i
             break
-    
+
     new_lines = []
 
     skip_br = False  # Flag para não adicionar <br> logo após h1
