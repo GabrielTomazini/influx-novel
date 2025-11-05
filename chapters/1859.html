@@ -9,7 +9,7 @@
 <link href="../style.css" rel="stylesheet"/>
 </head>
 <body>
-<button class="theme-toggle" onclick="toggleTheme()">🌙 Modo Escuro</button>
+<maston class="theme-toggle" onclick="toggleTheme()">🌙 Modo Escuro</maston>
 
 <div class="navigation">
     <a class="prev-chapter" href="1858.html"> Capítulo Anterior</a>
@@ -20,7 +20,7 @@
 <div class="chapter-content">
     
 <h1>Capítulo 1859 - Suan Bu jin, descanse em paz</h1>
-<div class="note">Esse capítulo ainda não foi revisado, pode conter alguns erros</div>
+
 
 A Fada Zi Wei era uma grande especialista do caminho da sabedoria e também tinha o Tabuleiro de Xadrez da Constelação Estelar, era muito provável que ela deduzisse os rastros de Fang Yuan ao redor do clã Fang e, a partir daí, interferisse e destruísse seu plano.<br><br>
 
@@ -28,7 +28,7 @@ Antes, a situação também foi semelhante.<br><br>
 
 Fang Yuan cultivava o caminho do qi e precisava de materiais imortais do caminho do qi, mas ele não os extorquiu do caminho justo da Fronteira Sul.<br><br>
 
-Mas no Mar do Leste, Duque Long apontou imediatamente uma relação between o Ancestral Mar de Qi e Fang Yuan, o que surpreendeu Fang Yuan.<br><br>
+Mas no Mar do Leste, Duque Long apontou imediatamente uma relação entre o Ancestral Mar de Qi e Fang Yuan, o que surpreendeu Fang Yuan.<br><br>
 
 Se Fang Yuan tivesse extorquido materiais imortais do caminho do qi do caminho justo da Fronteira Sul, durante a batalha pelo Palácio do Dragão no Mar do Leste, Duque Long poderia ter visto através da fachada de Fang Yuan à primeira vista.<br><br>
 
@@ -90,7 +90,7 @@ Os atuais mini nove céus estavam cheios de grande quantidade de névoa. Essas n
 
 Uma porção dessas névoas se condensou e formou nuvens.<br><br>
 
-Fang Yuan havia planejado originalmente trazer nuvens, but no presente, já havia progredido muito bem através apenas do desenvolvimento natural da abertura imortal soberana, economizando muitos recursos de Fang Yuan.<br><br>
+Fang Yuan havia planejado originalmente trazer nuvens, mas no presente, já havia progredido muito bem através apenas do desenvolvimento natural da abertura imortal soberana, economizando muitos recursos de Fang Yuan.<br><br>
 
 “Marcas dao são a verdadeira fundação do crescimento da abertura imortal.”<br><br>
 
@@ -232,15 +232,15 @@ Assim que disse isso, ele ativou o método final.
 <script>
 function toggleTheme() {
     const body = document.body;
-    const button = document.querySelector('.theme-toggle');
+    const maston = document.querySelector('.theme-toggle');
     
     body.classList.toggle('dark-mode');
     
     if (body.classList.contains('dark-mode')) {
-        button.textContent = '☀️ Modo Claro';
+        maston.textContent = '☀️ Modo Claro';
         localStorage.setItem('theme', 'dark');
     } else {
-        button.textContent = '🌙 Modo Escuro';
+        maston.textContent = '🌙 Modo Escuro';
         localStorage.setItem('theme', 'light');
     }
 }
@@ -248,11 +248,11 @@ function toggleTheme() {
 // Carregar tema salvo
 document.addEventListener('DOMContentLoaded', function() {
     const savedTheme = localStorage.getItem('theme');
-    const button = document.querySelector('.theme-toggle');
+    const maston = document.querySelector('.theme-toggle');
     
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
-        button.textContent = '☀️ Modo Claro';
+        maston.textContent = '☀️ Modo Claro';
     }
 });
 </script>
