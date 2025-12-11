@@ -454,6 +454,26 @@ body {
     border-radius: 10px;
 }
 
+/* Estilos para prevenir cliques múltiplos */
+.navigation a.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.navigation a.disabled::after {
+    content: "⏳";
+    position: absolute;
+    right: 10px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
 @media (max-width: 480px) {
     .chapter-content img {
         max-width: 100%;
