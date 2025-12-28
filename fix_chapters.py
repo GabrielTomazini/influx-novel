@@ -18,8 +18,12 @@ REPLACEMENTS = {
     "painstakingly": "diligentemente",
     "<A Lenda de Ren Zu>": "&lt;A Lenda de Ren Zu&gt;",
     "<As Lendas de Ren Zu>": "&lt;As Lendas de Ren Zu&gt;",
+    "Rumble—!": "Estrondo—!",
+    "Roar—!": "Rugido—!",
     "Rumble!": "Estrondo!",
     "Roar!": "Rugido!",
+    "Rumble—!!": "Estrondo—!!",
+    "Roar—!!": "Rugido—!!",
     "Rumble": "Estrondo",
     "Roar": "Rugido",
 }
