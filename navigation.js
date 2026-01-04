@@ -1,3 +1,31 @@
+// Funções de tema
+function toggleTheme() {
+    const body = document.body;
+    const button = document.querySelector('.theme-toggle');
+    
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        button.textContent = '☀️ Modo Claro';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        button.textContent = '🌙 Modo Escuro';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    const button = document.querySelector('.theme-toggle');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        if (button) {
+            button.textContent = '☀️ Modo Claro';
+        }
+    }
+}
+
 // Script para prevenir cliques múltiplos nos botões de navegação
 (function() {
     'use strict';
