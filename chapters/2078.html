@@ -191,7 +191,35 @@ E o clã Ba tinha um relacionamento próximo com o clã Chi, não eram apenas al
     <a class="next-chapter" href="2079.html">Próximo Capítulo </a>
 </div>
 
-<script src="../navigation.js"></script>
 
+<script>
+function toggleTheme() {
+    const body = document.body;
+    const button = document.querySelector('.theme-toggle');
+    
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        button.textContent = '☀️ Modo Claro';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        button.textContent = '🌙 Modo Escuro';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// Carregar tema salvo
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme');
+    const button = document.querySelector('.theme-toggle');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        button.textContent = '☀️ Modo Claro';
+    }
+});
+</script>
+
+<script src="../navigation.js"></script>
 </body>
 </html>

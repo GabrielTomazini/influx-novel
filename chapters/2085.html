@@ -216,6 +216,35 @@ Os olhos de Lu Wei Yin brilharam com luz brilhante: “Na camada mais profunda d
 <a class="menu-link" href="../index.html">📚 Voltar ao Menu</a>
 <a class="next-chapter" href="2086.html">Próximo Capítulo </a>
 </div>
+
+<script>
+function toggleTheme() {
+    const body = document.body;
+    const button = document.querySelector('.theme-toggle');
+    
+    body.classList.toggle('dark-mode');
+    
+    if (body.classList.contains('dark-mode')) {
+        button.textContent = '☀️ Modo Claro';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        button.textContent = '🌙 Modo Escuro';
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// Carregar tema salvo
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme');
+    const button = document.querySelector('.theme-toggle');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        button.textContent = '☀️ Modo Claro';
+    }
+});
+</script>
+
 <script src="../navigation.js"></script>
 </body>
 </html>
