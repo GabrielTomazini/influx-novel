@@ -88,3 +88,10 @@ function initTheme() {
         preventMultipleClicks();
     }
 })();
+
+// Inicializar o tema quando a página carregar
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTheme);
+} else {
+    initTheme();
+}
