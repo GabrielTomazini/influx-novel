@@ -24,6 +24,8 @@ REPLACEMENTS = {
     "Roar!": "Rugido!",
     "Rumble—!!": "Estrondo—!!",
     "Roar—!!": "Rugido—!!",
+    "Roar—!": "Rugido—!",
+    "Rumble…": "Estrondo…",
     "Rumble": "Estrondo",
     "Roar": "Rugido",
 }
