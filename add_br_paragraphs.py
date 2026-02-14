@@ -45,12 +45,42 @@ def add_br_to_paragraphs(html_content: str) -> tuple[str, int]:
     # Processar linha por linha
     lines = inner_content.split("\n")
 
-    # Encontrar o índice do último parágrafo com conteúdo
-    last_content_index = -1
+    # Marcar linhas que fazem parte de um bloco <p>...</p>
+    # (ex.: <p class="note">...</p>). Essas linhas não devem receber <br>
+    # e o texto imediatamente antes de um <p> também não deve receber <br>.
+    p_line = [False] * len(lines)
+    inside_p = False
+    p_start_re = re.compile(r"<\s*p\b", re.IGNORECASE)
+    p_end_re = re.compile(r"<\s*/\s*p\s*>", re.IGNORECASE)
+    for idx, l in enumerate(lines):
+        if not inside_p and p_start_re.search(l):
+            inside_p = True
+        if inside_p:
+            p_line[idx] = True
+        if inside_p and p_end_re.search(l):
+            inside_p = False
+
+    # Pré-calcular o próximo índice não-vazio para cada linha (para evitar <br> antes de <p>)
+    next_nonempty = [None] * len(lines)
+    next_idx = None
+    for idx in range(len(lines) - 1, -1, -1):
+        next_nonempty[idx] = next_idx
+        if lines[idx].strip():
+            next_idx = idx
+
+    # Encontrar o índice do último parágrafo de texto padrão (sem tags)
+    last_text_index = -1
     for i in range(len(lines) - 1, -1, -1):
-        if lines[i].strip():
-            last_content_index = i
-            break
+        stripped = lines[i].strip()
+        if not stripped:
+            continue
+        if p_line[i]:
+            continue
+        # Se a linha começa com uma tag (h1, div, p, etc.), não é texto padrão
+        if stripped.startswith("<"):
+            continue
+        last_text_index = i
+        break
 
     new_lines = []
 
@@ -70,6 +100,16 @@ def add_br_to_paragraphs(html_content: str) -> tuple[str, int]:
             new_lines.append(line)
             continue
 
+        # Linhas dentro de <p>...</p> devem permanecer intactas (sem <br> adicionados)
+        if p_line[i]:
+            new_lines.append(line)
+            continue
+
+        # Se a linha é uma tag (ex.: <h2>, <img>, etc.), manter como está
+        if stripped.startswith("<"):
+            new_lines.append(line)
+            continue
+
         # Se a linha está vazia, manter assim
         if not stripped:
             new_lines.append(line)
@@ -78,15 +118,21 @@ def add_br_to_paragraphs(html_content: str) -> tuple[str, int]:
         # Remover qualquer <br> no final da linha
         line_cleaned = re.sub(r"(<br\s*/?>\s*)+$", "", line, flags=re.IGNORECASE)
 
-        # Se a linha tem conteúdo, adicionar <br><br> (exceto no último parágrafo)
+        # Se a linha tem conteúdo, adicionar <br><br> (somente no texto padrão)
         if line_cleaned.strip():
-            if i == last_content_index:
-                # Último parágrafo - não adiciona <br><br>
+            # Não adicionar <br> se for o último texto padrão
+            if i == last_text_index:
                 new_lines.append(line_cleaned)
-            else:
-                # Outros parágrafos - adiciona <br><br>
-                new_lines.append(line_cleaned + "<br><br>")
-                changes += 1
+                continue
+
+            # Não adicionar <br> imediatamente antes de um bloco <p>
+            nxt = next_nonempty[i]
+            if nxt is not None and p_line[nxt]:
+                new_lines.append(line_cleaned)
+                continue
+
+            new_lines.append(line_cleaned + "<br><br>")
+            changes += 1
         else:
             new_lines.append(line)
 
