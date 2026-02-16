@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup
 
 # Dicionário com as substituições a serem feitas
 REPLACEMENTS = {
+    "Imortais Gu": "Imortais",
     "не": "não",
     "и": "e",
     "painstakingmente": "diligentemente",
