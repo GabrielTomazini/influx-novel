@@ -8,7 +8,11 @@ Uso: python fix_chapters.py arquivo1.html arquivo2.html ...
 import sys
 import re
 from pathlib import Path
-from bs4 import BeautifulSoup
+
+try:
+    from bs4 import BeautifulSoup
+except ModuleNotFoundError:  # pragma: no cover
+    BeautifulSoup = None
 
 # Dicionário com as substituições a serem feitas
 REPLACEMENTS = {
@@ -19,6 +23,7 @@ REPLACEMENTS = {
     "painstakingly": "diligentemente",
     "<A Lenda de Ren Zu>": "&lt;A Lenda de Ren Zu&gt;",
     "<As Lendas de Ren Zu>": "&lt;As Lendas de Ren Zu&gt;",
+    "<Lendas de Ren Zu>": "&lt;Lendas de Ren Zu&gt;",
     "Rumble—!": "Estrondo—!",
     "Roar—!": "Rugido—!",
     "Rumble!": "Estrondo!",
@@ -45,20 +50,40 @@ def fix_chapter_content(html_content):
     total_changes = 0
 
     # Primeiro, fazemos substituições no HTML puro para casos que podem ser interpretados como tags
-    html_text_replacements = {
-        "<A Lenda de Ren Zu>": "&lt;A Lenda de Ren Zu&gt;",
-        "<As Lendas de Ren Zu>": "&lt;As Lendas de Ren Zu&gt;",
-    }
+    # (se chegarem no BeautifulSoup como tags, o texto pode ser perdido e não dá para substituir depois).
+    raw_html_patterns = [
+        (r"<\s*A\s+Lenda\s+de\s+Ren\s+Zu\s*>", "&lt;A Lenda de Ren Zu&gt;"),
+        (r"<\s*As\s+Lendas\s+de\s+Ren\s+Zu\s*>", "&lt;As Lendas de Ren Zu&gt;"),
+        (r"<\s*Lendas\s+de\s+Ren\s+Zu\s*>", "&lt;Lendas de Ren Zu&gt;"),
+    ]
 
     modified_content = html_content
-    for old_text, new_text in html_text_replacements.items():
-        count = modified_content.count(old_text)
+    for pattern, replacement in raw_html_patterns:
+        modified_content, count = re.subn(pattern, replacement, modified_content)
         if count > 0:
-            modified_content = modified_content.replace(old_text, new_text)
             print(
-                f"    ✓ '{old_text}' → '{new_text}' ({count} ocorrências - no HTML bruto)"
+                f"    ✓ '{pattern}' → '{replacement}' ({count} ocorrências - no HTML bruto)"
             )
             total_changes += count
+
+    if BeautifulSoup is None:
+        print(
+            "  ⚠️  Dependência ausente: 'beautifulsoup4' (bs4). "
+            "Aplicando substituições no HTML inteiro como fallback. "
+            "Instale com: pip install beautifulsoup4"
+        )
+
+        for old_text, new_text in REPLACEMENTS.items():
+            if "<" in old_text and ">" in old_text:
+                continue
+            count = modified_content.count(old_text)
+            if count <= 0:
+                continue
+            modified_content = modified_content.replace(old_text, new_text)
+            print(f"    ✓ '{old_text}' → '{new_text}' ({count} ocorrências - fallback)")
+            total_changes += count
+
+        return modified_content, total_changes
 
     # Agora faz o parsing HTML para substituições dentro da div chapter-content
     soup = BeautifulSoup(modified_content, "html.parser")
@@ -68,34 +93,29 @@ def fix_chapter_content(html_content):
         print("  ⚠️  Div 'chapter-content' não encontrada")
         return modified_content, total_changes
 
-    # Aplica as substituições de texto normal
-    text_replacements = {
-        "не": "não",
-        "и": "e",
-        "painstakingmente": "diligentemente",
-        "painstakingly": "diligentemente",
-    }
+    # Aplica as substituições dentro da div chapter-content.
+    # Usamos o REPLACEMENTS como fonte da verdade, exceto as chaves com <...>,
+    # que já foram tratadas no HTML bruto acima.
+    for old_text, new_text in REPLACEMENTS.items():
+        if "<" in old_text and ">" in old_text:
+            continue
 
-    for old_word, new_word in text_replacements.items():
-        # Trabalha com o texto interno da div
-        chapter_text = chapter_content.get_text()
-        count_before = chapter_text.count(old_word)
+        chapter_html = str(chapter_content)
+        count_before = chapter_html.count(old_text)
+        if count_before <= 0:
+            continue
 
-        if count_before > 0:
-            # Substitui no HTML da div
-            chapter_html = str(chapter_content)
-            chapter_html = chapter_html.replace(old_word, new_word)
+        chapter_html = chapter_html.replace(old_text, new_text)
 
-            # Reconstrói o soup
-            new_soup = BeautifulSoup(
-                str(soup).replace(str(chapter_content), chapter_html),
-                "html.parser",
-            )
-            soup = new_soup
-            chapter_content = soup.find("div", class_="chapter-content")
+        new_soup = BeautifulSoup(
+            str(soup).replace(str(chapter_content), chapter_html),
+            "html.parser",
+        )
+        soup = new_soup
+        chapter_content = soup.find("div", class_="chapter-content")
 
-            print(f"    ✓ '{old_word}' → '{new_word}' ({count_before} ocorrências)")
-            total_changes += count_before
+        print(f"    ✓ '{old_text}' → '{new_text}' ({count_before} ocorrências)")
+        total_changes += count_before
 
     return str(soup), total_changes
 
