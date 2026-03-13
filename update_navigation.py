@@ -5,11 +5,12 @@ from pathlib import Path
 chapters_dir = Path(__file__).parent / "chapters"
 
 
-# Templates para os novos capítulos vazios
-def create_empty_chapter(chapter_num):
+# Template para navegação completa
+def create_chapter_with_navigation(chapter_num):
     prev_chapter = chapter_num - 1
     next_chapter = chapter_num + 1
 
+    # Começar a montar o arquivo
     html_content = f"""<!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -48,16 +49,14 @@ def create_empty_chapter(chapter_num):
     return html_content
 
 
-# Criar capítulos de 2276 a 2285
+# Atualizar capítulos de 2276 a 2285 com navegação completa
 for chapter_num in range(2276, 2286):
-    new_content = create_empty_chapter(chapter_num)
+    new_content = create_chapter_with_navigation(chapter_num)
 
-    # Salvar novo capítulo
     chapter_path = chapters_dir / f"{chapter_num}.html"
     with open(chapter_path, "w", encoding="utf-8") as f:
         f.write(new_content)
 
-    print(f"✓ Capítulo {chapter_num} atualizado com links corretos")
+    print(f"✓ Capítulo {chapter_num} atualizado com navegação completa")
 
 print("\n✓ Todos os capítulos foram atualizados com sucesso!")
-print("   Links adicionados: Anterior, Menu, Próximo")
