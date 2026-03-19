@@ -17,12 +17,14 @@ except ModuleNotFoundError:  # pragma: no cover
 # Dicionário com as substituições a serem feitas
 REPLACEMENTS = {
     "Imortais Gu": "Imortais",
+    "Imortal Gu": "Imortal",
     "не": "não",
     "и": "e",
     "painstakingmente": "diligentemente",
     "painstakingly": "diligentemente",
     "<A Lenda de Ren Zu>": "&lt;A Lenda de Ren Zu&gt;",
     "<As Lendas de Ren Zu>": "&lt;As Lendas de Ren Zu&gt;",
+    "As Lendas de Ren Zu": "&lt;As Lendas de Ren Zu&gt;",
     "<Lendas de Ren Zu>": "&lt;Lendas de Ren Zu&gt;",
     "Rumble—!": "Estrondo—!",
     "Roar—!": "Rugido—!",
